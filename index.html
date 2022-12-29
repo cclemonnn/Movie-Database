@@ -8,5 +8,49 @@
     <script src="script.js" defer></script>
     <title>Movie Database</title>
   </head>
-  <body></body>
+  <body>
+    <!-- Header -->
+    <header>
+      <h1>Movie Database</h1>
+      <!-- TMBD Logo -->
+      <form id="form">
+        <input
+          type="text"
+          id="search"
+          class="search"
+          placeholder="Movie Title"
+        />
+        <button type="submit" class="btn">Search</button>
+      </form>
+    </header>
+
+    <!-- Sort -->
+    <div class="sort-container">
+      <div class="sort-text">Sort By: Popularity</div>
+      <select name="sort" id="sort" class="sort-select">
+        <option value="popularity">Popularity</option>
+        <option value="rating">Rating</option>
+      </select>
+    </div>
+
+    <!-- Main Content -->
+    <main id="main">
+      <div class="movie">
+        <img src="./Iron_Man_3_poster.jpg" alt="movie-title" />
+        <div class="movie-info">
+          <h3>Movie Title</h3>
+          <span class="green">9.5</span>
+        </div>
+        <div class="overview">
+          <h3>Overview</h3>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam
+          temporibus quos laborum quasi esse deleniti impedit eveniet alias
+          voluptates odit, fuga eligendi odio explicabo ad facere modi tempora
+          nostrum ut.
+        </div>
+      </div>
+    </main>
+
+    <!-- Watch List -->
+  </body>
 </html>
