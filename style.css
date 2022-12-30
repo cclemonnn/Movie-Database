@@ -110,11 +110,22 @@ main {
 
 .movie {
   width: 300px;
+  height: 600px;
   background-color: var(--minor-theme);
   box-shadow: 2px 3px 5px rgba(218, 165, 32, 0.7);
   position: relative;
   overflow-y: auto;
   border-radius: 3px;
+}
+
+.movie::-webkit-scrollbar {
+  background-color: var(--minor-theme);
+  border-left: 1px solid var(--main-theme);
+}
+
+.movie::-webkit-scrollbar-thumb {
+  background-color: var(--main-theme);
+  border: 0.5px solid #ffd700;
 }
 
 .movie img {
@@ -170,6 +181,16 @@ main {
   color: transparent;
   overflow: auto;
   transition: transform 0.3s ease-in-out, color 0.3s;
+}
+
+.overview::-webkit-scrollbar {
+  background-color: var(--minor-theme);
+  border-left: 1px solid var(--main-theme);
+}
+
+.overview::-webkit-scrollbar-thumb {
+  background-color: var(--main-theme);
+  border: 0.5px solid #ffd700;
 }
 
 .movie:hover .overview {
