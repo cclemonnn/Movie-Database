@@ -9,6 +9,7 @@ const SEARCH_API = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}
 const form = document.getElementById("form");
 const search = document.getElementById("search");
 const main = document.getElementById("main");
+const searchText = document.querySelector(".search-text");
 
 getMovies(API_URL);
 
@@ -78,6 +79,7 @@ form.addEventListener("submit", (e) => {
   if (searchTerm && searchTerm !== "") {
     getMovies(SEARCH_API + searchTerm);
 
+    searchText.innerText = `Search Results: ${searchTerm}`;
     search.value = "";
   } else {
     window.location.reload();
