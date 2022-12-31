@@ -8,6 +8,7 @@ const SEARCH_API = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}
 // elements
 const form = document.getElementById("form");
 const search = document.getElementById("search");
+const main = document.getElementById("main");
 
 getMovies(API_URL);
 
@@ -20,9 +21,49 @@ async function getMovies(url) {
     }
 
     const data = await res.json();
+    showMovies(data.results);
     console.log(data.results);
   } catch (error) {
     console.error(error);
+  }
+}
+
+function showMovies(movies) {
+  main.innerHTML = "";
+
+  const container = document.createElement("div");
+
+  movies.forEach((movie) => {
+    const { title, poster_path, vote_average, overview } = movie;
+
+    const movieEl = document.createElement("div");
+    movieEl.classList.add("movie");
+
+    movieEl.innerHTML = `
+        <img src="${IMG_PATH + poster_path}" alt="${title}" />
+        <div class="movie-info">
+          <h3>${title}</h3>
+          <span class="${getClassByRate(vote_average)}">${vote_average.toFixed(
+      1
+    )}</span>
+        </div>
+        <div class="overview">
+          <h3>Overview</h3>
+          ${overview}
+        </div>
+    `;
+
+    main.appendChild(movieEl);
+  });
+}
+
+function getClassByRate(rate) {
+  if (rate < 5) {
+    return "red";
+  } else if (rate < 7) {
+    return "orange";
+  } else {
+    return "green";
   }
 }
 
