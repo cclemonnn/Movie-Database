@@ -36,16 +36,17 @@ function showMovies(movies) {
   movies.forEach((movie) => {
     const { title, poster_path, vote_average, overview } = movie;
 
-    const movieEl = document.createElement("div");
-    movieEl.classList.add("movie");
+    if (poster_path !== null) {
+      const movieEl = document.createElement("div");
+      movieEl.classList.add("movie");
 
-    movieEl.innerHTML = `
+      movieEl.innerHTML = `
         <img src="${IMG_PATH + poster_path}" alt="${title}" />
         <div class="movie-info">
           <h3>${title}</h3>
           <span class="${getClassByRate(vote_average)}">${vote_average.toFixed(
-      1
-    )}</span>
+        1
+      )}</span>
         </div>
         <div class="overview">
           <h3>Overview</h3>
@@ -53,7 +54,8 @@ function showMovies(movies) {
         </div>
     `;
 
-    main.appendChild(movieEl);
+      main.appendChild(movieEl);
+    }
   });
 }
 
