@@ -41,8 +41,10 @@ header {
 
 .form-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-right: 30px;
+  margin-left: 10px;
+  align-items: flex-end;
 }
 
 .search {
@@ -97,6 +99,28 @@ header {
   justify-content: space-between;
   font-weight: bold;
   letter-spacing: 1.5px;
+}
+
+/* Page */
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.page-text {
+  letter-spacing: 3px;
+}
+
+.current-page {
+  font-weight: bold;
+  color: #d2691e;
+}
+
+.total-page {
+  font-weight: bold;
+  color: #d2691e;
 }
 
 /* Main Content */
