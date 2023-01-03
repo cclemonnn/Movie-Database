@@ -13,9 +13,8 @@ const main = document.getElementById("main");
 const searchText = document.getElementsByClassName("search-text");
 
 // Page Elements
-const prev1 = document.getElementById("prev1");
-const prev2 = document.getElementById("prev2");
-const next = document.querySelectorAll(".next");
+const prev = document.querySelectorAll(".prev1");
+const nextBtns = document.querySelectorAll(".next");
 const currentPageText = document.querySelectorAll(".current-page");
 const totalPageText = document.querySelectorAll(".total-page");
 
@@ -54,11 +53,13 @@ async function getMovies(url, page, sort) {
         totalPage = data.total_pages;
       }
       setTotalPage();
+      checkBtns();
       showMovies(data.results);
     } else {
       // need style
       totalPage = 1;
       setTotalPage();
+      checkBtns();
       main.innerText = "no results";
     }
   } catch (error) {
@@ -128,8 +129,8 @@ form.addEventListener("submit", (e) => {
 });
 
 // Next Page Btn
-next.forEach((nextBtn) => {
-  nextBtn.addEventListener("click", showNextPage);
+nextBtns.forEach((btn) => {
+  btn.addEventListener("click", showNextPage);
 });
 
 function showNextPage() {
@@ -155,6 +156,20 @@ function resetPage() {
   currentPageText.forEach((page) => {
     page.innerText = 1;
   });
+}
+
+// Disable and Enable Btns
+function checkBtns() {
+  // next btns
+  if (currentPage === totalPage) {
+    nextBtns.forEach((btn) => {
+      btn.disabled = true;
+    });
+  } else {
+    nextBtns.forEach((btn) => {
+      btn.disabled = false;
+    });
+  }
 }
 
 // Set Total Page
