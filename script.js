@@ -6,23 +6,25 @@ const API_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&
 const IMG_PATH = "https://image.tmdb.org/t/p/w1280";
 const SEARCH_API = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&include_adult=false&query=`;
 
-// elements
+// Elements
 const form = document.getElementById("form");
 const search = document.getElementById("search");
 const main = document.getElementById("main");
 const searchText = document.getElementsByClassName("search-text");
+
+// Page Elements
 const prev1 = document.getElementById("prev1");
 const prev2 = document.getElementById("prev2");
-const next1 = document.getElementById("next1");
-const next2 = document.getElementById("next2");
+const next = document.querySelectorAll(".next");
 const currentPageText = document.querySelectorAll(".current-page");
+const totalPageText = document.querySelectorAll(".total-page");
 
-// current URL
+// Current URL
 let currentURL = API_URL;
 let currentPage = 1;
 let totalPage = 15;
 
-// get movies
+// Get Movies
 getMovies(API_URL, 1);
 
 async function getMovies(url, page, sort) {
@@ -51,9 +53,12 @@ async function getMovies(url, page, sort) {
       } else {
         totalPage = data.total_pages;
       }
+      setTotalPage();
       showMovies(data.results);
     } else {
       // need style
+      totalPage = 1;
+      setTotalPage();
       main.innerText = "no results";
     }
   } catch (error) {
@@ -61,6 +66,7 @@ async function getMovies(url, page, sort) {
   }
 }
 
+// Show Movies
 function showMovies(movies) {
   main.innerHTML = "";
 
@@ -92,7 +98,7 @@ function showMovies(movies) {
   });
 }
 
-// rating color
+// Rating Color
 function getClassByRate(rate) {
   if (rate < 5) {
     return "red";
@@ -103,7 +109,7 @@ function getClassByRate(rate) {
   }
 }
 
-// search function
+// Search Function
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -111,7 +117,7 @@ form.addEventListener("submit", (e) => {
 
   if (searchTerm && searchTerm !== "") {
     currentURL = SEARCH_API + searchTerm;
-    currentPage = 1;
+    resetPage();
     getMovies(currentURL);
 
     searchText.innerText = `Search Results: ${searchTerm}`;
@@ -121,15 +127,15 @@ form.addEventListener("submit", (e) => {
   }
 });
 
-// next page btn
-next1.addEventListener("click", showNextPage);
-next2.addEventListener("click", showNextPage);
+// Next Page Btn
+next.forEach((nextBtn) => {
+  nextBtn.addEventListener("click", showNextPage);
+});
 
 function showNextPage() {
   if (currentPage < totalPage) {
     console.log(currentPage);
-    currentPage++;
-    incrementPageText();
+    incrementPage();
   }
   if (currentPage <= totalPage) {
     getMovies(currentURL, currentPage);
@@ -137,8 +143,23 @@ function showNextPage() {
   }
 }
 
-function incrementPageText() {
+// Page inc + dec + reset
+function incrementPage() {
+  currentPage++;
   currentPageText.forEach((page) => {
     page.innerText = currentPage;
+  });
+}
+function resetPage() {
+  currentPage = 1;
+  currentPageText.forEach((page) => {
+    page.innerText = 1;
+  });
+}
+
+// Set Total Page
+function setTotalPage() {
+  totalPageText.forEach((page) => {
+    page.innerText = totalPage;
   });
 }
