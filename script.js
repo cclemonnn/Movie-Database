@@ -10,15 +10,15 @@ const SEARCH_API = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}
 const form = document.getElementById("form");
 const search = document.getElementById("search");
 const main = document.getElementById("main");
-const searchText = document.getElementsByClassName("search-text");
+const searchText = document.querySelector(".search-text");
 
 // Page Elements
-const prev = document.querySelectorAll(".prev1");
+const prevBtns = document.querySelectorAll(".prev");
 const nextBtns = document.querySelectorAll(".next");
 const currentPageText = document.querySelectorAll(".current-page");
 const totalPageText = document.querySelectorAll(".total-page");
 
-// Current URL
+// Variables
 let currentURL = API_URL;
 let currentPage = 1;
 let totalPage = 15;
@@ -128,17 +128,27 @@ form.addEventListener("submit", (e) => {
   }
 });
 
-// Next Page Btn
+// Next Page Btns
 nextBtns.forEach((btn) => {
   btn.addEventListener("click", showNextPage);
 });
 
 function showNextPage() {
   if (currentPage < totalPage) {
-    console.log(currentPage);
     incrementPage();
+    getMovies(currentURL, currentPage);
+    window.scrollTo({ top: 0, behavior: "instant" });
   }
-  if (currentPage <= totalPage) {
+}
+
+// Prev Page Btns
+prevBtns.forEach((btn) => {
+  btn.addEventListener("click", showPrevPage);
+});
+
+function showPrevPage() {
+  if (currentPage > 1) {
+    decrementPage();
     getMovies(currentURL, currentPage);
     window.scrollTo({ top: 0, behavior: "instant" });
   }
@@ -147,6 +157,12 @@ function showNextPage() {
 // Page inc + dec + reset
 function incrementPage() {
   currentPage++;
+  currentPageText.forEach((page) => {
+    page.innerText = currentPage;
+  });
+}
+function decrementPage() {
+  currentPage--;
   currentPageText.forEach((page) => {
     page.innerText = currentPage;
   });
@@ -167,6 +183,16 @@ function checkBtns() {
     });
   } else {
     nextBtns.forEach((btn) => {
+      btn.disabled = false;
+    });
+  }
+  // prev btns
+  if (currentPage === 1) {
+    prevBtns.forEach((btn) => {
+      btn.disabled = true;
+    });
+  } else {
+    prevBtns.forEach((btn) => {
       btn.disabled = false;
     });
   }
