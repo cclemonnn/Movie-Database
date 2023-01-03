@@ -90,6 +90,17 @@ header {
   border-color: lightcyan;
 }
 
+.btn:disabled {
+  background-color: #c0c0c0;
+  border-color: #e0e0e0;
+  color: white;
+  cursor: not-allowed;
+}
+
+.btn:disabled:active {
+  transform: scale(1);
+}
+
 /* Sort */
 .sort-container {
   margin-top: 110px;
