@@ -2,7 +2,7 @@ import API_KEY from "./secrets.js";
 
 // API URLs
 // const API_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&page=1`;
-const API_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&&include_adult=false`;
+const API_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&include_adult=false`;
 const IMG_PATH = "https://image.tmdb.org/t/p/w1280";
 const SEARCH_API = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&include_adult=false&query=`;
 
@@ -84,9 +84,14 @@ function showMovies(movies) {
         <img src="${IMG_PATH + poster_path}" alt="${title}" />
         <div class="movie-info">
           <h3>${title}</h3>
-          <span class="${getClassByRate(vote_average)}">${vote_average.toFixed(
-        1
-      )}</span>
+          <div class="rating-container">
+            <span class="${getClassByRate(
+              vote_average
+            )}">${vote_average.toFixed(1)}</span>
+              <i class="fa-brands fa-youtube">
+              </i>
+              <div class="youtube-text">Watch Trailer</div>
+          </div>
         </div>
         <div class="overview">
           <h3>Overview</h3>
