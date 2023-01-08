@@ -251,7 +251,7 @@ main {
   font-size: 25px;
   border-radius: 20%;
   box-shadow: 0.5px 0.5px 3px #9999ff;
-  z-index: 4;
+  z-index: 1;
 }
 
 .fa-youtube:hover {
@@ -274,7 +274,6 @@ main {
   line-height: 15px;
   text-align: center;
   transform: translateX(50%);
-  z-index: 1;
   opacity: 0;
   transition: all 0.3s ease-in-out;
 }
@@ -282,4 +281,42 @@ main {
 .fa-youtube:hover + .youtube-text {
   transform: translate(0);
   opacity: 1;
+}
+
+/* Overlay */
+.overlay {
+  height: 100%;
+  width: 0%;
+  position: fixed;
+  z-index: 20;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  color: #c0c0c0;
+}
+
+.closebtn:hover {
+  color: #e0e0e0;
+  cursor: pointer;
+}
+
+.closebtn:active {
+  transform: scale(0.9);
 }
