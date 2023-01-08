@@ -18,6 +18,9 @@ const nextBtns = document.querySelectorAll(".next");
 const currentPageText = document.querySelectorAll(".current-page");
 const totalPageText = document.querySelectorAll(".total-page");
 
+// Trailer Elements
+const closeTrailerBtn = document.querySelector(".closebtn");
+
 // Variables
 let currentURL = API_URL;
 let currentPage = 1;
@@ -74,7 +77,7 @@ function showMovies(movies) {
   const container = document.createElement("div");
 
   movies.forEach((movie) => {
-    const { title, poster_path, vote_average, overview } = movie;
+    const { title, poster_path, vote_average, overview, id } = movie;
 
     if (poster_path !== null) {
       const movieEl = document.createElement("div");
@@ -88,7 +91,7 @@ function showMovies(movies) {
             <span class="${getClassByRate(
               vote_average
             )}">${vote_average.toFixed(1)}</span>
-              <i class="fa-brands fa-youtube">
+              <i id="${id}" class="fa-brands fa-youtube">
               </i>
               <div class="youtube-text">Watch Trailer</div>
           </div>
@@ -98,8 +101,9 @@ function showMovies(movies) {
           ${overview}
         </div>
     `;
-
       main.appendChild(movieEl);
+      // youtube icon opens trailer onclick
+      document.getElementById(id).addEventListener("click", openTrailer);
     }
   });
 }
@@ -208,4 +212,14 @@ function setTotalPage() {
   totalPageText.forEach((page) => {
     page.innerText = totalPage;
   });
+}
+
+// Open and Close Trailer Overlay
+closeTrailerBtn.addEventListener("click", closeTrailer);
+
+function openTrailer() {
+  document.getElementById("trailer-overlay").style.width = "100%";
+}
+function closeTrailer() {
+  document.getElementById("trailer-overlay").style.width = "0%";
 }
