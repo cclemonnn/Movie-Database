@@ -19,7 +19,9 @@ const currentPageText = document.querySelectorAll(".current-page");
 const totalPageText = document.querySelectorAll(".total-page");
 
 // Trailer Elements
+const TRAILIER_API = "https://api.themoviedb.org/3/movie/";
 const closeTrailerBtn = document.querySelector(".closebtn");
+const overlayContent = document.getElementById("overlay-content");
 
 // Variables
 let currentURL = API_URL;
@@ -103,7 +105,9 @@ function showMovies(movies) {
     `;
       main.appendChild(movieEl);
       // youtube icon opens trailer onclick
-      document.getElementById(id).addEventListener("click", openTrailer);
+      document.getElementById(id).addEventListener("click", () => {
+        openTrailer(movie);
+      });
     }
   });
 }
@@ -217,9 +221,43 @@ function setTotalPage() {
 // Open and Close Trailer Overlay
 closeTrailerBtn.addEventListener("click", closeTrailer);
 
-function openTrailer() {
+function openTrailer(movie) {
   document.getElementById("trailer-overlay").style.width = "100%";
+  console.log(movie);
+  getTrailer(movie);
 }
 function closeTrailer() {
   document.getElementById("trailer-overlay").style.width = "0%";
+}
+
+// Get Trailer
+async function getTrailer(movie) {
+  let trailers = [];
+  const { id } = movie;
+  const url =
+    TRAILIER_API + id + "/videos?api_key=" + API_KEY + "&language=en-US";
+
+  // fetch trailers
+  try {
+    const res = await fetch(url);
+    if (!res.ok) {
+      console.log("status: " + res.status);
+      throw Error;
+    }
+    const data = await res.json();
+    const results = data.results;
+    console.log(results);
+
+    results.forEach((result) => {
+      const { key, name, official, site, type } = result;
+      if (official && site === "YouTube" && type === "Trailer") {
+        trailers.push(
+          `<iframe width="560" height="315" src="https://www.youtube.com/embed/${key}" title="${name}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
+        );
+      }
+    });
+    overlayContent.innerHTML = trailers[0];
+  } catch (error) {
+    console.error(error);
+  }
 }
