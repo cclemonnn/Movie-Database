@@ -269,13 +269,11 @@ async function getTrailer(movie) {
     if (trailers.length > 0) {
       totalTrailerPage = trailers.length;
       setTotalTrailerPage();
-      resetTrailerPage();
-      showTrailer(0);
+      showTrailer(1);
     } else {
       // if no trailer
       totalTrailerPage = 1;
       setTotalTrailerPage();
-      resetTrailerPage();
       checkTrailerBtns();
       overlayContent.innerText = "No Trailer Provided";
     }
@@ -287,7 +285,7 @@ async function getTrailer(movie) {
 // Show and Remove Trailer
 function showTrailer(page) {
   console.log(trailers[0]);
-  overlayContent.innerHTML = trailers[page];
+  overlayContent.innerHTML = trailers[page - 1];
   checkTrailerBtns();
 }
 function removeTrailer() {
@@ -297,11 +295,11 @@ function removeTrailer() {
 // Next and Prev Trailer Page Btn
 nextTrailerBtn.addEventListener("click", () => {
   incrementTrailerPage();
-  showTrailer(currentTrailerPage - 1);
+  showTrailer(currentTrailerPage);
 });
 prevTrailerBtn.addEventListener("click", () => {
   decrementTrailerPage();
-  showTrailer(currentTrailerPage - 1);
+  showTrailer(currentTrailerPage);
 });
 
 // Trailer Page inc + dec + reset + set total
