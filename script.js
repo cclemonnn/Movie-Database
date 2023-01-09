@@ -74,7 +74,7 @@ async function getMovies(url, page, sort) {
       totalPage = 1;
       setTotalPage();
       checkBtns();
-      main.innerText = "no results";
+      main.innerText = "No Results";
     }
   } catch (error) {
     console.error(error);
@@ -176,7 +176,7 @@ function showPrevPage() {
   }
 }
 
-// Page inc + dec + reset
+// Page inc + dec + reset + set total
 function incrementPage() {
   currentPage++;
   currentPageText.forEach((page) => {
@@ -195,8 +195,13 @@ function resetPage() {
     page.innerText = 1;
   });
 }
+function setTotalPage() {
+  totalPageText.forEach((page) => {
+    page.innerText = totalPage;
+  });
+}
 
-// Disable and Enable Btns
+// Disable and Enable Page Btns
 function checkBtns() {
   // next btns
   if (currentPage === totalPage) {
@@ -220,13 +225,6 @@ function checkBtns() {
   }
 }
 
-// Set Total Page
-function setTotalPage() {
-  totalPageText.forEach((page) => {
-    page.innerText = totalPage;
-  });
-}
-
 // Open and Close Trailer Overlay
 closeTrailerBtn.addEventListener("click", closeTrailer);
 
@@ -243,6 +241,7 @@ function closeTrailer() {
 // Get Trailer
 async function getTrailer(movie) {
   trailers = []; // reset trailers
+  resetTrailerPage();
   const { id } = movie;
   const url =
     TRAILIER_API + id + "/videos?api_key=" + API_KEY + "&language=en-US";
@@ -267,7 +266,19 @@ async function getTrailer(movie) {
         );
       }
     });
-    showTrailer(0);
+    if (trailers.length > 0) {
+      totalTrailerPage = trailers.length;
+      setTotalTrailerPage();
+      resetTrailerPage();
+      showTrailer(0);
+    } else {
+      // if no trailer
+      totalTrailerPage = 1;
+      setTotalTrailerPage();
+      resetTrailerPage();
+      checkTrailerBtns();
+      overlayContent.innerText = "No Trailer Provided";
+    }
   } catch (error) {
     console.error(error);
   }
@@ -277,13 +288,51 @@ async function getTrailer(movie) {
 function showTrailer(page) {
   console.log(trailers[0]);
   overlayContent.innerHTML = trailers[page];
+  checkTrailerBtns();
 }
 function removeTrailer() {
   overlayContent.innerHTML = "";
 }
 
-// Next Trailer Page Btn
+// Next and Prev Trailer Page Btn
 nextTrailerBtn.addEventListener("click", () => {
-  currentTrailerPage++;
+  incrementTrailerPage();
   showTrailer(currentTrailerPage - 1);
 });
+prevTrailerBtn.addEventListener("click", () => {
+  decrementTrailerPage();
+  showTrailer(currentTrailerPage - 1);
+});
+
+// Trailer Page inc + dec + reset + set total
+function incrementTrailerPage() {
+  currentTrailerPage++;
+  currentTrailerText.innerText = currentTrailerPage;
+}
+function decrementTrailerPage() {
+  currentTrailerPage--;
+  currentTrailerText.innerText = currentTrailerPage;
+}
+function resetTrailerPage() {
+  currentTrailerPage = 1;
+  currentTrailerText.innerText = 1;
+}
+function setTotalTrailerPage() {
+  totalTrailerText.innerText = totalTrailerPage;
+}
+
+// Disable and Enable Trailer Page Btns
+function checkTrailerBtns() {
+  // next btn
+  if (currentTrailerPage === totalTrailerPage) {
+    nextTrailerBtn.disabled = true;
+  } else {
+    nextTrailerBtn.disabled = false;
+  }
+  // prev btn
+  if (currentTrailerPage === 1) {
+    prevTrailerBtn.disabled = true;
+  } else {
+    prevTrailerBtn.disabled = false;
+  }
+}
