@@ -252,11 +252,12 @@ async function getTrailer(movie) {
       const { key, name, official, site, type } = result;
       if (official && site === "YouTube" && type === "Trailer") {
         trailers.push(
-          `<iframe width="560" height="315" src="https://www.youtube.com/embed/${key}" title="${name}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
+          `<iframe width="640" height="385" src="https://www.youtube.com/embed/${key}" title="${name}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
         );
       }
     });
     overlayContent.innerHTML = trailers[0];
+    console.log(trailers);
   } catch (error) {
     console.error(error);
   }
