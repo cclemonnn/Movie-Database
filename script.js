@@ -22,11 +22,20 @@ const totalPageText = document.querySelectorAll(".total-page");
 const TRAILIER_API = "https://api.themoviedb.org/3/movie/";
 const closeTrailerBtn = document.querySelector(".closebtn");
 const overlayContent = document.getElementById("overlay-content");
+const prevTrailerBtn = document.querySelector(".prev-trailer");
+const nextTrailerBtn = document.querySelector(".next-trailer");
+const currentTrailerText = document.querySelector(".current-trailer");
+const totalTrailerText = document.querySelector(".total-trailer");
 
 // Variables
 let currentURL = API_URL;
 let currentPage = 1;
 let totalPage = 15;
+
+// Trailer Variables
+let trailers = [];
+let currentTrailerPage = 1;
+let totalTrailerPage = 1;
 
 // Get Movies
 getMovies(API_URL, 1);
@@ -228,11 +237,12 @@ function openTrailer(movie) {
 }
 function closeTrailer() {
   document.getElementById("trailer-overlay").style.width = "0%";
+  removeTrailer();
 }
 
 // Get Trailer
 async function getTrailer(movie) {
-  let trailers = [];
+  trailers = []; // reset trailers
   const { id } = movie;
   const url =
     TRAILIER_API + id + "/videos?api_key=" + API_KEY + "&language=en-US";
@@ -251,14 +261,29 @@ async function getTrailer(movie) {
     results.forEach((result) => {
       const { key, name, official, site, type } = result;
       if (official && site === "YouTube" && type === "Trailer") {
+        // save trailers
         trailers.push(
           `<iframe width="640" height="385" src="https://www.youtube.com/embed/${key}" title="${name}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
         );
       }
     });
-    overlayContent.innerHTML = trailers[0];
-    console.log(trailers);
+    showTrailer(0);
   } catch (error) {
     console.error(error);
   }
 }
+
+// Show and Remove Trailer
+function showTrailer(page) {
+  console.log(trailers[0]);
+  overlayContent.innerHTML = trailers[page];
+}
+function removeTrailer() {
+  overlayContent.innerHTML = "";
+}
+
+// Next Trailer Page Btn
+nextTrailerBtn.addEventListener("click", () => {
+  currentTrailerPage++;
+  showTrailer(currentTrailerPage - 1);
+});
