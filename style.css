@@ -102,6 +102,10 @@ header {
   transform: scale(1);
 }
 
+.home {
+  display: none;
+}
+
 /* Sort */
 .sort-container {
   margin-top: 110px;
