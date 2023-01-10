@@ -1,16 +1,23 @@
 import API_KEY from "./secrets.js";
 
 // API URLs
-// const API_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&page=1`;
-const API_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&include_adult=false`;
+// const API_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&include_adult=false`;
+const POPULAR_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&include_adult=false`;
+const LATEST_URL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&include_adult=false`;
+const TOP_RATED_URL = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&include_adult=false`;
 const IMG_PATH = "https://image.tmdb.org/t/p/w1280";
 const SEARCH_API = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&include_adult=false&query=`;
 
-// Elements
+// Main Elements
 const form = document.getElementById("form");
 const search = document.getElementById("search");
 const main = document.getElementById("main");
 const searchText = document.querySelector(".search-text");
+
+// Showing Option Elements
+const popularBtn = document.querySelector(".popular");
+const latestBtn = document.querySelector(".latest");
+const topRatedBtn = document.querySelector(".top-rated");
 
 // Page Elements
 const prevBtns = document.querySelectorAll(".prev");
@@ -27,8 +34,8 @@ const nextTrailerBtn = document.querySelector(".next-trailer");
 const currentTrailerText = document.querySelector(".current-trailer");
 const totalTrailerText = document.querySelector(".total-trailer");
 
-// Variables
-let currentURL = API_URL;
+// Page Variables
+let currentURL = POPULAR_URL;
 let currentPage = 1;
 let totalPage = 15;
 
@@ -37,8 +44,11 @@ let trailers = [];
 let currentTrailerPage = 1;
 let totalTrailerPage = 1;
 
+// Selected Showing Type (popular, latest, top rated)
+let selectedShowing = [true, false, false];
+
 // Get Movies
-getMovies(API_URL, 1);
+getMovies(POPULAR_URL, 1);
 
 async function getMovies(url, page, sort) {
   let fullURL = url;
@@ -132,6 +142,8 @@ function getClassByRate(rate) {
   }
 }
 
+// Show Options
+
 // Search Function
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -140,7 +152,7 @@ form.addEventListener("submit", (e) => {
 
   if (searchTerm && searchTerm !== "") {
     currentURL = SEARCH_API + searchTerm;
-    resetPage();
+    resetCurrentPage();
     getMovies(currentURL);
 
     searchText.innerText = `Search Results: ${searchTerm}`;
@@ -189,7 +201,7 @@ function decrementPage() {
     page.innerText = currentPage;
   });
 }
-function resetPage() {
+function resetCurrentPage() {
   currentPage = 1;
   currentPageText.forEach((page) => {
     page.innerText = 1;
@@ -332,5 +344,48 @@ function checkTrailerBtns() {
     prevTrailerBtn.disabled = true;
   } else {
     prevTrailerBtn.disabled = false;
+  }
+}
+
+// Showing Options
+popularBtn.addEventListener("click", () => {
+  if (!selectedShowing[0]) {
+    selectedShowing = [true, false, false];
+    markSelection();
+    resetCurrentPage();
+    getMovies(POPULAR_URL, currentPage);
+  }
+});
+latestBtn.addEventListener("click", () => {
+  if (!selectedShowing[1]) {
+    selectedShowing = [false, true, false];
+    markSelection();
+    resetCurrentPage();
+    getMovies(LATEST_URL, currentPage);
+  }
+});
+topRatedBtn.addEventListener("click", () => {
+  if (!selectedShowing[2]) {
+    selectedShowing = [false, false, true];
+    markSelection();
+    resetCurrentPage();
+    getMovies(TOP_RATED_URL, currentPage);
+  }
+});
+
+// Mark As Selected
+function markSelection() {
+  if (selectedShowing[0]) {
+    popularBtn.classList.add("selected");
+    latestBtn.classList.remove("selected");
+    topRatedBtn.classList.remove("selected");
+  } else if (selectedShowing[1]) {
+    popularBtn.classList.remove("selected");
+    latestBtn.classList.add("selected");
+    topRatedBtn.classList.remove("selected");
+  } else if (selectedShowing[2]) {
+    popularBtn.classList.remove("selected");
+    latestBtn.classList.remove("selected");
+    topRatedBtn.classList.add("selected");
   }
 }
