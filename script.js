@@ -13,6 +13,7 @@ const form = document.getElementById("form");
 const search = document.getElementById("search");
 const main = document.getElementById("main");
 const searchText = document.querySelector(".search-text");
+const homeBtn = document.querySelector(".home");
 
 // Showing Option Elements
 const popularBtn = document.querySelector(".popular");
@@ -155,6 +156,7 @@ form.addEventListener("submit", (e) => {
     currentURL = SEARCH_API + searchTerm;
     resetCurrentPage();
     hideShowingTypes();
+    showHomeBtn();
     getMovies(currentURL);
 
     searchText.innerText = `Search Results: ${searchTerm}`;
@@ -395,4 +397,14 @@ function markSelectedType() {
 // Hide Showing Types
 function hideShowingTypes() {
   showingTypeBtns.style.display = "none";
+}
+
+// Home Btn
+homeBtn.addEventListener("click", () => {
+  location.reload();
+});
+
+// Show Home Btn
+function showHomeBtn() {
+  homeBtn.style.display = "block";
 }
