@@ -18,6 +18,7 @@ const searchText = document.querySelector(".search-text");
 const popularBtn = document.querySelector(".popular");
 const latestBtn = document.querySelector(".latest");
 const topRatedBtn = document.querySelector(".top-rated");
+const showingTypeBtns = document.querySelector(".showing-type-btns");
 
 // Page Elements
 const prevBtns = document.querySelectorAll(".prev");
@@ -153,6 +154,7 @@ form.addEventListener("submit", (e) => {
   if (searchTerm && searchTerm !== "") {
     currentURL = SEARCH_API + searchTerm;
     resetCurrentPage();
+    hideShowingTypes();
     getMovies(currentURL);
 
     searchText.innerText = `Search Results: ${searchTerm}`;
@@ -351,7 +353,7 @@ function checkTrailerBtns() {
 popularBtn.addEventListener("click", () => {
   if (!selectedShowing[0]) {
     selectedShowing = [true, false, false];
-    markSelection();
+    markSelectedType();
     resetCurrentPage();
     getMovies(POPULAR_URL, currentPage);
   }
@@ -359,7 +361,7 @@ popularBtn.addEventListener("click", () => {
 latestBtn.addEventListener("click", () => {
   if (!selectedShowing[1]) {
     selectedShowing = [false, true, false];
-    markSelection();
+    markSelectedType();
     resetCurrentPage();
     getMovies(LATEST_URL, currentPage);
   }
@@ -367,14 +369,14 @@ latestBtn.addEventListener("click", () => {
 topRatedBtn.addEventListener("click", () => {
   if (!selectedShowing[2]) {
     selectedShowing = [false, false, true];
-    markSelection();
+    markSelectedType();
     resetCurrentPage();
     getMovies(TOP_RATED_URL, currentPage);
   }
 });
 
-// Mark As Selected
-function markSelection() {
+// Mark Selected Showing Type
+function markSelectedType() {
   if (selectedShowing[0]) {
     popularBtn.classList.add("selected");
     latestBtn.classList.remove("selected");
@@ -388,4 +390,9 @@ function markSelection() {
     latestBtn.classList.remove("selected");
     topRatedBtn.classList.add("selected");
   }
+}
+
+// Hide Showing Types
+function hideShowingTypes() {
+  showingTypeBtns.style.display = "none";
 }
