@@ -82,6 +82,7 @@ header {
 
 .btn:hover {
   cursor: pointer;
+  color: #008b8b;
 }
 
 .btn:active {
@@ -110,6 +111,22 @@ header {
   justify-content: space-between;
   font-weight: bold;
   letter-spacing: 1.5px;
+}
+
+.showing-type-btns :is(:hover) {
+  color: #008b8b;
+  background-color: #ffd700;
+}
+
+.selected,
+.selected:hover {
+  background-color: #ff8c00;
+  color: #00ffff;
+  cursor: auto;
+}
+
+.selected:active {
+  transform: scale(1);
 }
 
 /* Page */
