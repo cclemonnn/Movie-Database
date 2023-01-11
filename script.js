@@ -52,15 +52,11 @@ let selectedShowing = [true, false, false];
 // Get Movies
 getMovies(POPULAR_URL, 1);
 
-async function getMovies(url, page, sort) {
+async function getMovies(url, page) {
   let fullURL = url;
   try {
     if (page) {
       fullURL = fullURL + "&page=" + page;
-    }
-
-    if (sort) {
-      fullURL = fullURL + "&sort_by=" + sort;
     }
 
     const res = await fetch(fullURL);
@@ -117,6 +113,7 @@ function showMovies(movies) {
               <i id="${id}" class="fa-brands fa-youtube">
               </i>
               <div class="youtube-text">Watch Trailer</div>
+              <i class="${id} fa-regular fa-star"></i>
           </div>
         </div>
         <div class="overview">
