@@ -165,11 +165,13 @@ form.addEventListener("submit", (e) => {
     hideShowingTypes();
     showHomeBtn();
     getMovies(currentURL);
+    window.scrollTo({ top: 0, behavior: "instant" });
 
     searchText.innerHTML = `Search Results: <span class="search-value">${searchTerm}</span>`;
     search.value = "";
   } else {
     getMovies(currentURL, currentPage);
+    window.scrollTo({ top: 0, behavior: "instant" });
   }
 });
 
@@ -409,6 +411,7 @@ function hideShowingTypes() {
 // Home Btn
 homeBtn.addEventListener("click", () => {
   location.reload();
+  window.scrollTo({ top: 0, behavior: "instant" });
 });
 
 // Show Home Btn
