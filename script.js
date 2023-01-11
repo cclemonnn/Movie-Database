@@ -156,7 +156,7 @@ form.addEventListener("submit", (e) => {
     showHomeBtn();
     getMovies(currentURL);
 
-    searchText.innerText = `Search Results: ${searchTerm}`;
+    searchText.innerHTML = `Search Results: <span class="search-value">${searchTerm}</span>`;
     search.value = "";
   } else {
     getMovies(currentURL, currentPage);

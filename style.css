@@ -71,6 +71,11 @@ header {
   color: transparent;
 }
 
+.search-value {
+  text-shadow: 2px 1px 0.7px #ee82ee;
+  font-size: large;
+}
+
 .btn {
   font-family: inherit;
   background-color: var(--minor-theme);
