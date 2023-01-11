@@ -317,11 +317,11 @@ main {
   box-shadow: 0.5px 0.5px 5px rgba(255, 127, 80, 0.9);
 }
 
-.fa-regular {
+.fa-regular.fa-star {
   color: #a0a0a0;
 }
 
-.fa-solid {
+.fa-solid.fa-star {
   color: #ff8c00;
   box-shadow: 0.5px 0.5px 5px rgb(70, 130, 180);
 }
@@ -385,4 +385,46 @@ main {
 
 .trailer-dash {
   color: #d2691e;
+}
+
+/* Watchlist */
+.watchlist {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  background-color: var(--minor-theme);
+  z-index: 10;
+  border-top: 1px dashed #ffd700;
+  padding: 3px 7px;
+}
+
+.watchlist-container {
+  display: flex;
+  gap: 0.5rem 2rem;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.watchlist-item {
+  font-family: inherit;
+  font-size: large;
+  letter-spacing: 2px;
+  text-shadow: 2px 1px 0.7px #ee82ee;
+  background-color: #ffd700;
+  padding: 1px 5px 1px 10px;
+  border-radius: 5%;
+}
+
+.fa-rectangle-xmark {
+  text-shadow: none;
+  color: #ff6347;
+}
+
+.fa-rectangle-xmark:hover {
+  cursor: pointer;
+  color: #ff0000;
+}
+
+.fa-rectangle-xmark:active {
+  transform: scale(0.9);
 }
