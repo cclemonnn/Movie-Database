@@ -49,6 +49,9 @@ let totalTrailerPage = 1;
 // Selected Showing Type (popular, latest, top rated)
 let selectedShowing = [true, false, false];
 
+// Watchlist Variable
+let watchlist = new Set(["s315162"]);
+
 // Get Movies
 getMovies(POPULAR_URL, 1);
 
@@ -110,10 +113,10 @@ function showMovies(movies) {
             <span class="${getClassByRate(
               vote_average
             )}">${vote_average.toFixed(1)}</span>
-              <i id="${id}" class="fa-brands fa-youtube">
+              <i id="t${id}" class="fa-brands fa-youtube">
               </i>
               <div class="youtube-text">Watch Trailer</div>
-              <i class="${id} fa-regular fa-star"></i>
+              <i id="s${id}" class="fa-regular fa-star"></i>
           </div>
         </div>
         <div class="overview">
@@ -123,8 +126,15 @@ function showMovies(movies) {
     `;
       main.appendChild(movieEl);
       // youtube icon opens trailer onclick
-      document.getElementById(id).addEventListener("click", () => {
+      document.getElementById("t" + id).addEventListener("click", () => {
         openTrailer(movie);
+      });
+      // star icon
+      const star = document.getElementById("s" + id);
+      checkStar(star);
+
+      star.addEventListener("click", () => {
+        toggleStar(star);
       });
     }
   });
@@ -404,4 +414,24 @@ homeBtn.addEventListener("click", () => {
 // Show Home Btn
 function showHomeBtn() {
   homeBtn.style.display = "block";
+}
+
+// Check Star
+function checkStar(star) {
+  console.log(star.id);
+
+  if (watchlist.has(star.id)) {
+    star.classList.replace("fa-regular", "fa-solid");
+  }
+}
+
+// Toggle Star
+function toggleStar(star) {
+  if (watchlist.has(star.id)) {
+    star.classList.replace("fa-solid", "fa-regular");
+    watchlist.delete(star.id);
+  } else {
+    star.classList.replace("fa-regular", "fa-solid");
+    watchlist.add(star.id);
+  }
 }
