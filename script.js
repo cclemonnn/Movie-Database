@@ -53,7 +53,7 @@ let totalTrailerPage = 1;
 let selectedShowing = [true, false, false];
 
 // Watchlist Variable
-let watchlist = new Set([315162]);
+let watchlist = new Set();
 
 // Get Movies
 getMovies(POPULAR_URL, 1);
@@ -139,6 +139,7 @@ function showMovies(movies) {
       star.addEventListener("click", () => {
         toggleList(title, id);
         toggleStar(id, star);
+        deleteItemXmark(id);
       });
     }
   });
@@ -436,26 +437,63 @@ function toggleStar(id, star) {
   // add to list if not in list
   if (!watchlist.has(id)) {
     star.classList.replace("fa-regular", "fa-solid");
-    watchlist.add(id);
+    addToList(id);
   } else {
     star.classList.replace("fa-solid", "fa-regular");
-    watchlist.delete(id);
+    removeFromList(id);
   }
   console.log(watchlist);
+}
+
+// Add and Remove item
+function addToList(id) {
+  watchlist.add(id);
+}
+function removeFromList(id) {
+  watchlist.delete(id);
 }
 
 // Toggle Movie in Watchlist
 function toggleList(title, id) {
   // show list if not in list
   if (!watchlist.has(id)) {
-    listContainer.innerHTML += `
-      <div class="watchlist-item">
-        ${title}
-        <i id="${id}" class="fa-solid fa-rectangle-xmark"></i>
-      </div>`;
+    const newItem = document.createElement("div");
+    newItem.classList.add("watchlist-item");
+    newItem.innerHTML = `${title}
+        <i id="${id}" class="fa-solid fa-rectangle-xmark"></i>`;
+
+    listContainer.appendChild(newItem);
+    // listContainer.innerHTML += `
+    //   <div class="watchlist-item">
+    //     ${title}
+    //     <i id="${id}" class="fa-solid fa-rectangle-xmark"></i>
+    //   </div>`;
   } else {
     // remove movie from list
     const movie = document.getElementById(id);
     movie.parentElement.remove();
+  }
+}
+
+// Update List Xmarks
+function deleteItemXmark(id) {
+  console.log(listContainer);
+  const item = document.getElementById(id);
+
+  if (item) {
+    item.addEventListener("click", () => {
+      console.log(item.parentElement);
+      item.parentElement.remove();
+      removeFromList(id);
+      removeStarOnPage(id);
+    });
+  }
+}
+
+// Remove Star
+function removeStarOnPage(id) {
+  const star = document.getElementById("s" + id);
+  if (star) {
+    star.classList.replace("fa-solid", "fa-regular");
   }
 }
