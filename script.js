@@ -36,6 +36,9 @@ const nextTrailerBtn = document.querySelector(".next-trailer");
 const currentTrailerText = document.querySelector(".current-trailer");
 const totalTrailerText = document.querySelector(".total-trailer");
 
+// Watchlist Elements
+const listContainer = document.querySelector(".watchlist-container");
+
 // Page Variables
 let currentURL = POPULAR_URL;
 let currentPage = 1;
@@ -50,7 +53,7 @@ let totalTrailerPage = 1;
 let selectedShowing = [true, false, false];
 
 // Watchlist Variable
-let watchlist = new Set(["s315162"]);
+let watchlist = new Set([315162]);
 
 // Get Movies
 getMovies(POPULAR_URL, 1);
@@ -131,10 +134,11 @@ function showMovies(movies) {
       });
       // star icon
       const star = document.getElementById("s" + id);
-      checkStar(star);
+      checkStar(id, star);
 
       star.addEventListener("click", () => {
-        toggleStar(star);
+        toggleList(title, id);
+        toggleStar(id, star);
       });
     }
   });
@@ -420,21 +424,38 @@ function showHomeBtn() {
 }
 
 // Check Star
-function checkStar(star) {
-  console.log(star.id);
-
-  if (watchlist.has(star.id)) {
+function checkStar(id, star) {
+  if (watchlist.has(id)) {
     star.classList.replace("fa-regular", "fa-solid");
   }
 }
 
 // Toggle Star
-function toggleStar(star) {
-  if (watchlist.has(star.id)) {
-    star.classList.replace("fa-solid", "fa-regular");
-    watchlist.delete(star.id);
-  } else {
+function toggleStar(id, star) {
+  console.log(watchlist);
+  // add to list if not in list
+  if (!watchlist.has(id)) {
     star.classList.replace("fa-regular", "fa-solid");
-    watchlist.add(star.id);
+    watchlist.add(id);
+  } else {
+    star.classList.replace("fa-solid", "fa-regular");
+    watchlist.delete(id);
+  }
+  console.log(watchlist);
+}
+
+// Toggle Movie in Watchlist
+function toggleList(title, id) {
+  // show list if not in list
+  if (!watchlist.has(id)) {
+    listContainer.innerHTML += `
+      <div class="watchlist-item">
+        ${title}
+        <i id="${id}" class="fa-solid fa-rectangle-xmark"></i>
+      </div>`;
+  } else {
+    // remove movie from list
+    const movie = document.getElementById(id);
+    movie.parentElement.remove();
   }
 }
