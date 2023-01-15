@@ -471,7 +471,7 @@ footer {
   box-shadow: 1px 1px 5px rgba(34, 139, 34, 0.8);
   transform: translateY(-10px);
   opacity: 0;
-  transition: transform 0.5s ease-in-out, opacity 0.2s;
+  transition: transform 0.5s ease-in-out, opacity 0.5s;
 }
 
 .red-alert {
@@ -492,4 +492,13 @@ footer {
 .movie-title {
   text-shadow: 2px 1px 1px #ee82ee;
   letter-spacing: 1.5px;
+}
+
+.added {
+  color: #0000cd;
+  font-weight: bold;
+}
+.removed {
+  color: #ff4500;
+  font-weight: bold;
 }
