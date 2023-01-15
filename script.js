@@ -141,9 +141,15 @@ function showMovies(movies) {
       checkStar(id, star);
 
       star.addEventListener("click", () => {
-        toggleList(title, id);
-        toggleStar(id, star, title);
-        deleteItemXmark(id, title);
+        // check if star is selected
+        let selected = star.classList.contains("fa-solid");
+        if (watchlist.size < 5 || selected) {
+          toggleList(title, id);
+          toggleStar(id, star, title);
+          deleteItemXmark(id, title);
+        } else {
+          showRedAlert();
+        }
       });
     }
   });
@@ -517,5 +523,15 @@ function showGreenAlert(title, type) {
 
   setTimeout(() => {
     greenAlert.classList.remove("show");
+  }, 2000);
+}
+
+// Show Red Alert
+function showRedAlert() {
+  redAlert.innerHTML = "Watchlist is full (5 max)";
+  redAlert.classList.add("show");
+
+  setTimeout(() => {
+    redAlert.classList.remove("show");
   }, 2000);
 }
