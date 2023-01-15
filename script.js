@@ -39,6 +39,10 @@ const totalTrailerText = document.querySelector(".total-trailer");
 // Watchlist Elements
 const listContainer = document.querySelector(".watchlist-container");
 
+// Alert Elements
+const greenAlert = document.querySelector(".green-alert");
+const redAlert = document.querySelector(".red-alert");
+
 // Page Variables
 let currentURL = POPULAR_URL;
 let currentPage = 1;
@@ -495,5 +499,15 @@ function removeStarOnPage(id) {
   const star = document.getElementById("s" + id);
   if (star) {
     star.classList.replace("fa-solid", "fa-regular");
+  }
+}
+
+// Show Green Alert
+function showGreenAlert(title, type) {
+  if (type === "add") {
+    greenAlert.innerHTML = `${title} Added to Watchlist`;
+    greenAlert.classList.add("show");
+  } else if (type === "delete") {
+    greenAlert.innerHTML = `${title} Removed from Watchlist`;
   }
 }

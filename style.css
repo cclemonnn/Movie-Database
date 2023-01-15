@@ -488,3 +488,8 @@ footer {
   transform: translate(0);
   opacity: 1;
 }
+
+.movie-title {
+  text-shadow: 2px 1px 1px #ee82ee;
+  letter-spacing: 1.5px;
+}
