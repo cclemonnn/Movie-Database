@@ -528,7 +528,7 @@ function showGreenAlert(title, type) {
 
 // Show Red Alert
 function showRedAlert() {
-  redAlert.innerHTML = "Watchlist is full (5 max)";
+  redAlert.innerHTML = "Watchlist is <b>full</b> (5 max)";
   redAlert.classList.add("show");
 
   setTimeout(() => {
