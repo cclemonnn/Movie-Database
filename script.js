@@ -103,8 +103,6 @@ async function getMovies(url, page) {
 function showMovies(movies) {
   main.innerHTML = "";
 
-  const container = document.createElement("div");
-
   movies.forEach((movie) => {
     const { title, poster_path, vote_average, overview, id } = movie;
 
@@ -165,8 +163,6 @@ function getClassByRate(rate) {
     return "green";
   }
 }
-
-// Show Options
 
 // Search Function
 form.addEventListener("submit", (e) => {
@@ -475,11 +471,6 @@ function toggleList(title, id) {
         <i id="${id}" class="fa-solid fa-rectangle-xmark"></i>`;
 
     listContainer.appendChild(newItem);
-    // listContainer.innerHTML += `
-    //   <div class="watchlist-item">
-    //     ${title}
-    //     <i id="${id}" class="fa-solid fa-rectangle-xmark"></i>
-    //   </div>`;
   } else {
     // remove movie from list
     const movie = document.getElementById(id);
@@ -528,7 +519,6 @@ function showGreenAlert(title, type) {
 
 // Show Red Alert
 function showRedAlert() {
-  redAlert.innerHTML = "Watchlist is <b>full</b> (5 max)";
   redAlert.classList.add("show");
 
   setTimeout(() => {
