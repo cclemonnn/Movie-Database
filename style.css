@@ -186,7 +186,7 @@ main {
 
 .movie::-webkit-scrollbar-thumb {
   background-color: var(--main-theme);
-  border: 0.5px solid #ffd700;
+  border: 1px solid #ffd700;
 }
 
 .movie img {
@@ -206,7 +206,7 @@ main {
 
 .movie-info h3 {
   color: black;
-  text-shadow: 0.5px 0.5px 0.7px #ee82ee;
+  text-shadow: 1px 1px 0.7px #ee82ee;
 }
 
 .movie-info span {
@@ -251,7 +251,7 @@ main {
 
 .overview::-webkit-scrollbar-thumb {
   background-color: var(--main-theme);
-  border: 0.5px solid #ffd700;
+  border: 1px solid #ffd700;
 }
 
 .movie:hover .overview {
@@ -276,7 +276,7 @@ main {
   color: #ff0000;
   font-size: 25px;
   border-radius: 20%;
-  box-shadow: 0.5px 0.5px 3px #9999ff;
+  box-shadow: 1px 1px 3px #9999ff;
   z-index: 1;
 }
 
@@ -314,7 +314,7 @@ main {
 .fa-star {
   border-radius: 50%;
   padding: 1px;
-  box-shadow: 0.5px 0.5px 5px rgba(255, 127, 80, 0.9);
+  box-shadow: 1px 1px 5px rgba(255, 127, 80, 0.9);
 }
 
 .fa-regular.fa-star {
@@ -323,7 +323,7 @@ main {
 
 .fa-solid.fa-star {
   color: #ff8c00;
-  box-shadow: 0.5px 0.5px 5px rgb(70, 130, 180);
+  box-shadow: 1px 1px 5px rgb(70, 130, 180);
 }
 
 /* Overlay */
@@ -427,4 +427,28 @@ main {
 
 .fa-rectangle-xmark:active {
   transform: scale(0.9);
+}
+
+footer {
+  min-height: 150px;
+  margin-top: 50px;
+  padding: 5px 10px;
+  background-color: #eee8aa;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgba(0, 0, 139, 0.3);
+}
+
+.api-source {
+  margin-bottom: 7px;
+}
+
+.tmdb,
+.author-name {
+  letter-spacing: 2px;
+  text-shadow: 2px 1px 0.7px #ee82ee;
+}
+
+.logo {
+  min-width: 500px;
 }
