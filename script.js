@@ -142,8 +142,8 @@ function showMovies(movies) {
 
       star.addEventListener("click", () => {
         toggleList(title, id);
-        toggleStar(id, star);
-        deleteItemXmark(id);
+        toggleStar(id, star, title);
+        deleteItemXmark(id, title);
       });
     }
   });
@@ -436,15 +436,17 @@ function checkStar(id, star) {
 }
 
 // Toggle Star
-function toggleStar(id, star) {
+function toggleStar(id, star, title) {
   console.log(watchlist);
   // add to list if not in list
   if (!watchlist.has(id)) {
     star.classList.replace("fa-regular", "fa-solid");
     addToList(id);
+    showGreenAlert(title, "add");
   } else {
     star.classList.replace("fa-solid", "fa-regular");
     removeFromList(id);
+    showGreenAlert(title, "remove");
   }
   console.log(watchlist);
 }
@@ -480,7 +482,7 @@ function toggleList(title, id) {
 }
 
 // Update List Xmarks
-function deleteItemXmark(id) {
+function deleteItemXmark(id, title) {
   console.log(listContainer);
   const item = document.getElementById(id);
 
@@ -490,6 +492,7 @@ function deleteItemXmark(id) {
       item.parentElement.remove();
       removeFromList(id);
       removeStarOnPage(id);
+      showGreenAlert(title, "remove");
     });
   }
 }
@@ -505,9 +508,14 @@ function removeStarOnPage(id) {
 // Show Green Alert
 function showGreenAlert(title, type) {
   if (type === "add") {
-    greenAlert.innerHTML = `${title} Added to Watchlist`;
+    greenAlert.innerHTML = `<span class="movie-title">${title}</span><span class="added"> Added</span> to Watchlist`;
     greenAlert.classList.add("show");
-  } else if (type === "delete") {
-    greenAlert.innerHTML = `${title} Removed from Watchlist`;
+  } else if (type === "remove") {
+    greenAlert.innerHTML = `<span class="movie-title">${title}</span><span class="removed"> Removed</span> from Watchlist`;
+    greenAlert.classList.add("show");
   }
+
+  setTimeout(() => {
+    greenAlert.classList.remove("show");
+  }, 2000);
 }
