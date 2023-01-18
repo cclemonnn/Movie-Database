@@ -1,7 +1,6 @@
 import API_KEY from "./secrets.js";
 
 // API URLs
-// const API_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&include_adult=false`;
 const POPULAR_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&include_adult=false`;
 const LATEST_URL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&include_adult=false`;
 const TOP_RATED_URL = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&include_adult=false`;
@@ -57,9 +56,11 @@ let totalTrailerPage = 1;
 let selectedShowing = [true, false, false];
 
 // Watchlist Variable
-let watchlist = new Set();
+let watchlist;
+let start = true;
 
 // Get Movies
+getWatchlist();
 getMovies(POPULAR_URL, 1);
 
 async function getMovies(url, page) {
@@ -138,6 +139,12 @@ function showMovies(movies) {
       const star = document.getElementById("s" + id);
       checkStar(id, star);
 
+      // start up function
+      if (start) {
+        createList(title, id);
+        deleteItemXmark(id, title);
+      }
+
       star.addEventListener("click", () => {
         // check if star is selected
         let selected = star.classList.contains("fa-solid");
@@ -151,6 +158,9 @@ function showMovies(movies) {
       });
     }
   });
+
+  // make start up function to call once only
+  start = false;
 }
 
 // Rating Color
@@ -456,9 +466,11 @@ function toggleStar(id, star, title) {
 // Add and Remove item
 function addToList(id) {
   watchlist.add(id);
+  localStorage.setItem("watchlist", JSON.stringify(Array.from(watchlist)));
 }
 function removeFromList(id) {
   watchlist.delete(id);
+  localStorage.setItem("watchlist", JSON.stringify(Array.from(watchlist)));
 }
 
 // Toggle Movie in Watchlist
@@ -478,9 +490,20 @@ function toggleList(title, id) {
   }
 }
 
+// Start Up Create Watchlist
+function createList(title, id) {
+  if (watchlist.has(id)) {
+    const newItem = document.createElement("div");
+    newItem.classList.add("watchlist-item");
+    newItem.innerHTML = `${title}
+        <i id="${id}" class="fa-solid fa-rectangle-xmark"></i>`;
+
+    listContainer.appendChild(newItem);
+  }
+}
+
 // Update List Xmarks
 function deleteItemXmark(id, title) {
-  console.log(listContainer);
   const item = document.getElementById(id);
 
   if (item) {
@@ -525,3 +548,15 @@ function showRedAlert() {
     redAlert.classList.remove("show");
   }, 2000);
 }
+
+// Get Watchlist from Local Storage
+function getWatchlist() {
+  if (localStorage.getItem("watchlist") === null) {
+    watchlist = new Set();
+  } else {
+    const items = JSON.parse(localStorage.getItem("watchlist"));
+    watchlist = new Set([...items]);
+  }
+}
+
+// localStorage.removeItem("watchlist");
