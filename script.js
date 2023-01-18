@@ -78,7 +78,6 @@ async function getMovies(url, page) {
 
     const data = await res.json();
     if (data.total_pages > 0) {
-      console.log(data.results);
       console.log(data);
       if (data.total_pages > 15) {
         totalPage = 15;
@@ -330,7 +329,6 @@ async function getTrailer(movie) {
 
 // Show and Remove Trailer
 function showTrailer(page) {
-  console.log(trailers[0]);
   overlayContent.innerHTML = trailers[page - 1];
   checkTrailerBtns();
 }
@@ -558,5 +556,3 @@ function getWatchlist() {
     watchlist = new Set([...items]);
   }
 }
-
-// localStorage.removeItem("watchlist");
