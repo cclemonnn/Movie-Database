@@ -62,6 +62,7 @@ let start = true;
 // Get Movies
 getWatchlist();
 getMovies(POPULAR_URL, 1);
+console.log(watchlist);
 
 async function getMovies(url, page) {
   let fullURL = url;
@@ -138,16 +139,10 @@ function showMovies(movies) {
       const star = document.getElementById("s" + id);
       checkStar(id, star);
 
-      // start up function
-      if (start) {
-        createList(title, id);
-        deleteItemXmark(id, title);
-      }
-
       star.addEventListener("click", () => {
         // check if star is selected
         let selected = star.classList.contains("fa-solid");
-        if (watchlist.size < 5 || selected) {
+        if (watchlist.length < 5 || selected) {
           toggleList(title, id);
           toggleStar(id, star, title);
           deleteItemXmark(id, title);
@@ -158,6 +153,13 @@ function showMovies(movies) {
     }
   });
 
+  // start up function
+  if (start) {
+    watchlist.forEach((item) => {
+      createList(item.id, item.title);
+      deleteItemXmark(item.id, item.title);
+    });
+  }
   // make start up function to call once only
   start = false;
 }
@@ -440,7 +442,15 @@ function showHomeBtn() {
 
 // Check Star
 function checkStar(id, star) {
-  if (watchlist.has(id)) {
+  // check if in watchlist
+  let inList = false;
+  watchlist.forEach((item) => {
+    if (item.id === id) {
+      inList = true;
+    }
+  });
+
+  if (inList) {
     star.classList.replace("fa-regular", "fa-solid");
   }
 }
@@ -448,10 +458,19 @@ function checkStar(id, star) {
 // Toggle Star
 function toggleStar(id, star, title) {
   console.log(watchlist);
+
+  // check if in watchlist
+  let inList = false;
+  watchlist.forEach((item) => {
+    if (item.id === id) {
+      inList = true;
+    }
+  });
+
   // add to list if not in list
-  if (!watchlist.has(id)) {
+  if (!inList) {
     star.classList.replace("fa-regular", "fa-solid");
-    addToList(id);
+    addToList(id, title);
     showGreenAlert(title, "add");
   } else {
     star.classList.replace("fa-solid", "fa-regular");
@@ -462,19 +481,33 @@ function toggleStar(id, star, title) {
 }
 
 // Add and Remove item
-function addToList(id) {
-  watchlist.add(id);
-  localStorage.setItem("watchlist", JSON.stringify(Array.from(watchlist)));
+function addToList(id, title) {
+  // watchlist.add(id);
+  // localStorage.setItem("watchlist", JSON.stringify(Array.from(watchlist)));
+
+  watchlist.push({ id, title });
+  localStorage.setItem("watchlist", JSON.stringify(watchlist));
 }
 function removeFromList(id) {
-  watchlist.delete(id);
-  localStorage.setItem("watchlist", JSON.stringify(Array.from(watchlist)));
+  // watchlist.delete(id);
+  // localStorage.setItem("watchlist", JSON.stringify(Array.from(watchlist)));
+
+  watchlist = watchlist.filter((item) => item.id !== id);
+  localStorage.setItem("watchlist", JSON.stringify(watchlist));
 }
 
 // Toggle Movie in Watchlist
 function toggleList(title, id) {
+  // check if in watchlist
+  let inList = false;
+  watchlist.forEach((item) => {
+    if (item.id === id) {
+      inList = true;
+    }
+  });
+
   // show list if not in list
-  if (!watchlist.has(id)) {
+  if (!inList) {
     const newItem = document.createElement("div");
     newItem.classList.add("watchlist-item");
     newItem.innerHTML = `${title}
@@ -489,15 +522,22 @@ function toggleList(title, id) {
 }
 
 // Start Up Create Watchlist
-function createList(title, id) {
-  if (watchlist.has(id)) {
-    const newItem = document.createElement("div");
-    newItem.classList.add("watchlist-item");
-    newItem.innerHTML = `${title}
+function createList(id, title) {
+  const newItem = document.createElement("div");
+  newItem.classList.add("watchlist-item");
+  newItem.innerHTML = `${title}
         <i id="${id}" class="fa-solid fa-rectangle-xmark"></i>`;
+  listContainer.appendChild(newItem);
 
-    listContainer.appendChild(newItem);
-  }
+  // if (inList) {
+  //   const newItem = document.createElement("div");
+  //   newItem.classList.add("watchlist-item");
+  //   newItem.innerHTML = `${title}
+  //       <i id="${id}" class="fa-solid fa-rectangle-xmark"></i>`;
+
+  //   listContainer.appendChild(newItem);
+  //   console.log(listContainer);
+  // }
 }
 
 // Update List Xmarks
@@ -550,9 +590,13 @@ function showRedAlert() {
 // Get Watchlist from Local Storage
 function getWatchlist() {
   if (localStorage.getItem("watchlist") === null) {
-    watchlist = new Set();
+    // watchlist = new Set();
+    watchlist = [];
   } else {
-    const items = JSON.parse(localStorage.getItem("watchlist"));
-    watchlist = new Set([...items]);
+    // const items = JSON.parse(localStorage.getItem("watchlist"));
+    // watchlist = new Set([...items]);
+    watchlist = JSON.parse(localStorage.getItem("watchlist"));
   }
 }
+
+// localStorage.clear();
