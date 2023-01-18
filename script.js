@@ -443,12 +443,7 @@ function showHomeBtn() {
 // Check Star
 function checkStar(id, star) {
   // check if in watchlist
-  let inList = false;
-  watchlist.forEach((item) => {
-    if (item.id === id) {
-      inList = true;
-    }
-  });
+  const inList = checkItemInList(id);
 
   if (inList) {
     star.classList.replace("fa-regular", "fa-solid");
@@ -460,12 +455,7 @@ function toggleStar(id, star, title) {
   console.log(watchlist);
 
   // check if in watchlist
-  let inList = false;
-  watchlist.forEach((item) => {
-    if (item.id === id) {
-      inList = true;
-    }
-  });
+  const inList = checkItemInList(id);
 
   // add to list if not in list
   if (!inList) {
@@ -499,12 +489,7 @@ function removeFromList(id) {
 // Toggle Movie in Watchlist
 function toggleList(title, id) {
   // check if in watchlist
-  let inList = false;
-  watchlist.forEach((item) => {
-    if (item.id === id) {
-      inList = true;
-    }
-  });
+  const inList = checkItemInList(id);
 
   // show list if not in list
   if (!inList) {
@@ -599,4 +584,13 @@ function getWatchlist() {
   }
 }
 
-// localStorage.clear();
+// Check if Item in Watchlist
+function checkItemInList(id) {
+  let inList = false;
+  watchlist.forEach((item) => {
+    if (item.id === id) {
+      inList = true;
+    }
+  });
+  return inList;
+}
