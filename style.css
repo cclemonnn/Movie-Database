@@ -435,6 +435,7 @@ footer {
   padding: 5px 10px;
   background-color: #eee8aa;
   display: flex;
+  gap: 1rem;
   justify-content: space-between;
   border-top: 1px solid rgba(0, 0, 139, 0.3);
 }
@@ -501,4 +502,10 @@ footer {
 .removed {
   color: #ff4500;
   font-weight: bold;
+}
+
+@media (width < 700px) {
+  .logo {
+    min-width: 300px;
+  }
 }
