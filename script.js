@@ -159,9 +159,9 @@ function showMovies(movies) {
       createList(item.id, item.title);
       deleteItemXmark(item.id, item.title);
     });
+    // make start up function to call once only
+    start = false;
   }
-  // make start up function to call once only
-  start = false;
 }
 
 // Rating Color
@@ -472,16 +472,10 @@ function toggleStar(id, star, title) {
 
 // Add and Remove item
 function addToList(id, title) {
-  // watchlist.add(id);
-  // localStorage.setItem("watchlist", JSON.stringify(Array.from(watchlist)));
-
   watchlist.push({ id, title });
   localStorage.setItem("watchlist", JSON.stringify(watchlist));
 }
 function removeFromList(id) {
-  // watchlist.delete(id);
-  // localStorage.setItem("watchlist", JSON.stringify(Array.from(watchlist)));
-
   watchlist = watchlist.filter((item) => item.id !== id);
   localStorage.setItem("watchlist", JSON.stringify(watchlist));
 }
@@ -513,16 +507,6 @@ function createList(id, title) {
   newItem.innerHTML = `${title}
         <i id="${id}" class="fa-solid fa-rectangle-xmark"></i>`;
   listContainer.appendChild(newItem);
-
-  // if (inList) {
-  //   const newItem = document.createElement("div");
-  //   newItem.classList.add("watchlist-item");
-  //   newItem.innerHTML = `${title}
-  //       <i id="${id}" class="fa-solid fa-rectangle-xmark"></i>`;
-
-  //   listContainer.appendChild(newItem);
-  //   console.log(listContainer);
-  // }
 }
 
 // Update List Xmarks
@@ -575,11 +559,8 @@ function showRedAlert() {
 // Get Watchlist from Local Storage
 function getWatchlist() {
   if (localStorage.getItem("watchlist") === null) {
-    // watchlist = new Set();
     watchlist = [];
   } else {
-    // const items = JSON.parse(localStorage.getItem("watchlist"));
-    // watchlist = new Set([...items]);
     watchlist = JSON.parse(localStorage.getItem("watchlist"));
   }
 }
