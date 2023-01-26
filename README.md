@@ -20,7 +20,7 @@ movie trailer player, and movie searching function.
 
 ## Acknowledgements
 This project was inspired by the [movie app project](https://github.com/bradtraversy/50projects50days/tree/master/movie-app)
-from a [Udemy](https://www.udemy.com/course/50-projects-50-days/) course by Brad Traversy.
+from a [Udemy course](https://www.udemy.com/course/50-projects-50-days/) by Brad Traversy.
 
 ## Contact
 Created by Peter Tseng
