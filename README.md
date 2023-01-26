@@ -16,7 +16,7 @@ movie trailer player, and movie searching function.
 - Movie Search
   - user can search up movies by entering the desired movie title in the search box
 - Movie Overview
-  - an overview of a movie will be shown when the cursor is hover over a movie box
+  - an overview of a movie will be shown when the cursor hover overs a movie box
 
 ## Acknowledgements
 This project was inspired by the [movie app project](https://github.com/bradtraversy/50projects50days/tree/master/movie-app)
