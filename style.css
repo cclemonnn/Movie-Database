@@ -14,13 +14,14 @@
 body {
   font-family: "Poppins", sans-serif;
   background-color: var(--main-theme);
+  min-width: 400px;
 }
 
 /* Header */
 header {
   position: fixed;
   top: 0;
-  width: 100vw;
+  width: 100%;
   background-color: var(--minor-theme);
   padding-bottom: 10px;
   z-index: 10;
@@ -391,7 +392,7 @@ main {
 .watchlist {
   position: fixed;
   bottom: 0;
-  width: 100vw;
+  width: 100%;
   background-color: var(--minor-theme);
   z-index: 10;
   border-top: 1px dashed #ffd700;
@@ -430,11 +431,13 @@ main {
 }
 
 footer {
-  min-height: 150px;
+  /* min-height: 150px; */
+  width: 100%;
   margin-top: 50px;
-  padding: 5px 10px;
+  padding: 5px 10px 100px;
   background-color: #eee8aa;
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   justify-content: space-between;
   border-top: 1px solid rgba(0, 0, 139, 0.3);
@@ -504,8 +507,38 @@ footer {
   font-weight: bold;
 }
 
-@media (width < 700px) {
+@media (250px <= width < 500px) {
   .logo {
-    min-width: 300px;
+    min-width: 200px;
+  }
+}
+
+@media (width < 250px) {
+  .logo {
+    min-width: 0;
+  }
+}
+
+@media (1000px <= width < 1300px) {
+  footer {
+    padding-bottom: 150px;
+  }
+}
+
+@media (700px <= width < 1000px) {
+  footer {
+    padding-bottom: 200px;
+  }
+}
+
+@media (500px <= width < 700px) {
+  footer {
+    padding-bottom: 300px;
+  }
+}
+
+@media (width < 500px) {
+  footer {
+    padding-bottom: 400px;
   }
 }
