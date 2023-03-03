@@ -62,7 +62,6 @@ let start = true;
 // Get Movies
 getWatchlist();
 getMovies(POPULAR_URL, 1);
-console.log(watchlist);
 
 async function getMovies(url, page) {
   let fullURL = url;
@@ -452,8 +451,6 @@ function checkStar(id, star) {
 
 // Toggle Star
 function toggleStar(id, star, title) {
-  console.log(watchlist);
-
   // check if in watchlist
   const inList = checkItemInList(id);
 
@@ -467,7 +464,6 @@ function toggleStar(id, star, title) {
     removeFromList(id);
     showGreenAlert(title, "remove");
   }
-  console.log(watchlist);
 }
 
 // Add and Remove item
@@ -515,7 +511,6 @@ function deleteItemXmark(id, title) {
 
   if (item) {
     item.addEventListener("click", () => {
-      console.log(item.parentElement);
       item.parentElement.remove();
       removeFromList(id);
       removeStarOnPage(id);
