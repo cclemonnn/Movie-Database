@@ -13,6 +13,7 @@ Users can watch the official movie trailer by clicking the YouTube logo at the b
 Users can search for movies by entering the desired movie title in the search box. The app will load and display relevant movies based on the user's search query.
 ### Movie Overview
 When the user hovers over a movie box, the app displays an overview of the movie, providing more information about the movie's plot, cast, rating, and other details.
+
 -------
 ## Acknowledgements
 This project was inspired by the [movie app project](https://github.com/bradtraversy/50projects50days/tree/master/movie-app)
