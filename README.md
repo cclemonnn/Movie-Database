@@ -2,11 +2,16 @@
 
 **App URL:** https://cclemonnn.github.io/Movie-Database/
 
-This app is a movie database that allows users to search movies, add them to a watchlist, and watch their trailers. It is built using HTML, CSS, and Vanilla Javascript, and it utilizes [The Movie Database (TMDB) API](https://www.themoviedb.org/documentation/api) to load movie data.
+This app is a movie database that allows users to search movies, add them to a watchlist, and watch their trailers.
 
-此專案是一個電影資料庫，允許使用者搜尋電影、將它們加入觀看清單以及觀看它們的預告片。此程式使用 HTML、CSS 和 Vanilla Javascript 建構，並使用 The Movie Database (TMDB) API 來載入電影資料。
-
+此專案是一個電影資料庫，允許使用者搜尋電影、將它們加入觀看清單以及觀看它們的預告片。
 ![Home](./images/Home.png)
+
+---
+
+## Project Skills (專案技能)
+
+Integrating The Movie Database (TMDB) API, Vanilla Javascript (ES6), CSS3, HTML5.
 
 ---
 
