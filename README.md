@@ -11,7 +11,7 @@ This app is a movie database that allows users to search movies, add them to a w
 
 ## Project Skills (專案技能)
 
-Integrating The Movie Database (TMDB) API, Vanilla Javascript (ES6), CSS3, HTML5.
+Integrating The Movie Database (TMDB) API, Local Storage, Vanilla Javascript (ES6), CSS3, HTML5.
 
 ---
 
