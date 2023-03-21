@@ -4,7 +4,7 @@
 
 This app is a movie database that allows users to search movies, add them to a watchlist, and watch their trailers.
 
-此專案是一個電影資料庫，允許使用者搜尋電影、將它們加入觀看清單以及觀看它們的預告片。
+此專案是一個電影資料庫，允許使用者搜尋電影、將電影加入觀看清單以及觀看電影預告片。
 ![Home](./images/Home.png)
 
 ---
