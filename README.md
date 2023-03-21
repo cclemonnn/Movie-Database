@@ -7,8 +7,8 @@ This app is a movie database that allows users to search movies, add them to a w
 此專案是一個電影資料庫，允許使用者搜尋電影、將它們加入觀看清單以及觀看它們的預告片。此程式使用 HTML、CSS 和 Vanilla Javascript 建構，並使用 The Movie Database (TMDB) API 來載入電影資料。
 
 ![Home](./images/Home.png)
-![Search Avatar](./images/Avatar_to_list.png)
 ![Trailer](./images/Trailer.png)
+![Search Avatar](./images/Avatar_to_list.png)
 
 ---
 
