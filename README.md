@@ -4,7 +4,7 @@
 
 This app is a movie database that allows users to search movies, add them to a watchlist, and watch their trailers. It is built using HTML, CSS, and Vanilla Javascript, and it utilizes [The Movie Database (TMDB) API](https://www.themoviedb.org/documentation/api) to load movie data.
 
-這個應用程式是一個電影資料庫，允許使用者搜尋電影、將它們加入觀看清單以及觀看它們的預告片。此程式使用 HTML、CSS 和 Vanilla Javascript 建構，並使用 The Movie Database (TMDB) API 來載入電影資料。
+此專案是一個電影資料庫，允許使用者搜尋電影、將它們加入觀看清單以及觀看它們的預告片。此程式使用 HTML、CSS 和 Vanilla Javascript 建構，並使用 The Movie Database (TMDB) API 來載入電影資料。
 
 ![Home](./images/Home.png)
 ![Search Avatar](./images/Avatar_to_list.png)
@@ -18,7 +18,7 @@ This app is a movie database that allows users to search movies, add them to a w
 
 - The app allows users to add up to 5 movies to their watchlist by clicking the star button at the bottom of each movie box. To remove a movie from the watchlist, the user can either click the star button again or click the X-mark of the movie in the watchlist. The watchlist is saved in local storage so that it persists across sessions.
 
-- 此應用程式允許使用者按下每部電影方塊底部的星星按鈕，將最多 5 部電影加入觀看清單。若要從觀看清單中移除電影，使用者可以再次點擊星星按鈕或點擊觀看清單中電影的 X 標記。觀看清單儲存在本地儲存裝置中。
+- 此應用程式允許使用者按下每部電影方塊底部的星星按鈕，將最多 5 部電影加入觀看清單。若要從觀看清單中移除電影，使用者可以再次點擊星星按鈕或點擊觀看清單中電影的 X 標記。觀看清單儲存在 local storage。
 
 ### Movie Trailer Player (電影預告片播放器)
 
