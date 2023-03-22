@@ -58,7 +58,7 @@ Integrating The Movie Database (TMDB) API, Local Storage, Vanilla Javascript (ES
 
 ### Movie Overview (電影總覽)
 
-- When the user hovers over a movie box, the app displays an overview of the movie, providing more information about the movie's plot, cast, rating, and other details.
+- When you hover over a movie box, the app displays an overview of the movie, providing more information about the movie's plot, cast, rating, and other details.
 
 - 當使用者將滑鼠移至電影方塊上時，應用程式會顯示有關該電影的概述，提供有關該電影的情節、演員、評分和其他詳細信息。
   ![Overview](./images/Overview.png)
